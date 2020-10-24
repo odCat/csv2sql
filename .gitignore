@@ -1,0 +1,7 @@
+__pycache__/
+.*.swm
+.*.swn
+.*.swo
+.*.swp
+.*.un~
+*.*~
