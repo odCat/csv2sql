@@ -1,3 +1,5 @@
+#!python3
+
 def open_file(aFile):
     return open(aFile)
 
@@ -14,3 +16,6 @@ def get_rows(aFile):
     for i in lines:
         rows.append(parse_columns(i.rstrip()))
     return rows
+
+if __name__ == '__main__':
+    pass
