@@ -4,6 +4,13 @@ import csv2sql
 
 class SampleTest(unittest.TestCase):
 
+    def setUp(self):
+        f = open('test.csv', 'w')
+        f.write('column1,columns2,column3,column4\n')
+        f.write(',value2,value3,value4\n')
+        f.write(',value21,value3,value4')
+        f.close()
+
     def test_open_file(self):
         f = csv2sql.open_file('test.csv')
         self.assertTrue(f)
@@ -16,10 +23,6 @@ class SampleTest(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_input(self):
-        f = open('test.csv', 'w')
-        f.write('column1,columns2,column3,column4\n')
-        f.write(',value2,value3,value4\n')
-        f.close()
         f = open('test.csv', 'r')
         titles = csv2sql.get_titles(f)
         expected_titles= ['column1','columns2','column3','column4']
