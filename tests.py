@@ -22,11 +22,20 @@ class SampleTest(unittest.TestCase):
         result = csv2sql.parse_columns(columns_line)
         self.assertEqual(result, expected)
 
-    def test_input(self):
+    def test_get_titles(self):
         f = open('test.csv', 'r')
         titles = csv2sql.get_titles(f)
         expected_titles= ['column1','columns2','column3','column4']
         self.assertEqual(expected_titles, titles)
+        f.close()
+
+    def test_get_rows(self):
+        f = open('test.csv', 'r')
+        f.readline()
+        rows = csv2sql.get_rows(f)
+        expected_rows = [['','value2','value3','value4'],
+                         ['','value21','value3','value4']]
+        self.assertEqual(expected_rows, rows)
         f.close()
 
 if __name__ == '__main__':
