@@ -17,5 +17,24 @@ def get_rows(aFile):
         rows.append(parse_columns(i.rstrip()))
     return rows
 
+def generate_sql(titles, rows):
+    sql = 'select'
+    count = 1
+    for i in titles:
+        sql += '\n\tcolumn' + str(count) + ' as ' + i + ','
+        count += 1
+    sql = sql[:-1] + '\n'
+    sql += 'from values'
+    for i in rows:
+        sql += '\n\t('
+        for j in i:
+            if j == '':
+                sql += 'null,'
+            else:
+                sql += "'" + j + "'," 
+        sql = sql[:-1] + '),'
+    sql = sql[:-1] + '\n;'
+    return sql
+
 if __name__ == '__main__':
     pass

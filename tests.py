@@ -6,7 +6,7 @@ class SampleTest(unittest.TestCase):
 
     def setUp(self):
         f = open('test.csv', 'w')
-        f.write('column1,columns2,column3,column4\n')
+        f.write('column1,column2,column3,column4\n')
         f.write(',value2,value3,value4\n')
         f.write(',value21,value3,value4')
         f.close()
@@ -25,7 +25,7 @@ class SampleTest(unittest.TestCase):
     def test_get_titles(self):
         f = open('test.csv', 'r')
         titles = csv2sql.get_titles(f)
-        expected_titles= ['column1','columns2','column3','column4']
+        expected_titles= ['column1','column2','column3','column4']
         self.assertEqual(expected_titles, titles)
         f.close()
 
@@ -36,6 +36,24 @@ class SampleTest(unittest.TestCase):
         expected_rows = [['','value2','value3','value4'],
                          ['','value21','value3','value4']]
         self.assertEqual(expected_rows, rows)
+        f.close()
+
+    def test_generate_sql(self):
+        f = open('test.csv', 'r')
+        titles = csv2sql.get_titles(f)
+        rows = csv2sql.get_rows(f)
+        expected_sql = (
+                'select\n'
+                '\tcolumn1 as column1,\n'
+                '\tcolumn2 as column2,\n'
+                '\tcolumn3 as column3,\n'
+                '\tcolumn4 as column4\n'
+                'from values\n'
+                "\t(null,'value2','value3','value4'),\n"
+                "\t(null,'value21','value3','value4')\n"
+                ';')
+        self.assertEqual(expected_sql,
+                         csv2sql.generate_sql(titles, rows))
         f.close()
 
 if __name__ == '__main__':
