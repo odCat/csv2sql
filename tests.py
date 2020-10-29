@@ -1,18 +1,26 @@
+import os
 import unittest
 
 import csv2sql
 
 class Csv2sqlTests(unittest.TestCase):
+    test_file = 'test.csv'
 
     def setUp(self):
-        f = open('test.csv', 'w')
+        f = open(self.test_file, 'w')
         f.write('column1,column2,column3,column4\n')
         f.write(',value2,value3,value4\n')
         f.write(',value21,value3,value4')
         f.close()
 
+    def tearDown(self):
+        if os.path.exists(self.test_file):
+            os.remove(self.test_file)
+        else:
+            print('The file does not exist')
+
     def test_open_file(self):
-        f = csv2sql.open_file('test.csv')
+        f = csv2sql.open_file(self.test_file)
         self.assertTrue(f)
         f.close()
 
@@ -23,14 +31,14 @@ class Csv2sqlTests(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_get_titles(self):
-        f = open('test.csv', 'r')
+        f = open(self.test_file, 'r')
         titles = csv2sql.get_titles(f)
         expected_titles= ['column1','column2','column3','column4']
         self.assertEqual(expected_titles, titles)
         f.close()
 
     def test_get_rows(self):
-        f = open('test.csv', 'r')
+        f = open(self.test_file, 'r')
         f.readline()
         rows = csv2sql.get_rows(f)
         expected_rows = [['','value2','value3','value4'],
@@ -39,7 +47,7 @@ class Csv2sqlTests(unittest.TestCase):
         f.close()
 
     def test_generate_sql(self):
-        f = open('test.csv', 'r')
+        f = open(self.test_file, 'r')
         titles = csv2sql.get_titles(f)
         rows = csv2sql.get_rows(f)
         expected_sql = (
