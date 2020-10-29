@@ -2,7 +2,7 @@ import unittest
 
 import csv2sql
 
-class SampleTest(unittest.TestCase):
+class Csv2sqlTests(unittest.TestCase):
 
     def setUp(self):
         f = open('test.csv', 'w')
