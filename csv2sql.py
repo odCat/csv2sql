@@ -32,9 +32,12 @@ def generate_sql(titles, rows):
         sql += '\n\t('
         for j in i:
             if j == '':
-                sql += 'null,'
+                sql += 'null'
+            elif j == 'TRUE' or j == 'FALSE':
+                sql += j
             else:
-                sql += "'" + add_escape(j) + "'," 
+                sql += "'" + add_escape(j) + "'" 
+            sql += ','
         sql = sql[:-1] + '),'
     sql = sql[:-1] + '\n;'
     return sql
@@ -43,7 +46,6 @@ if __name__ == '__main__':
     f = open('input.csv', 'r')
 
     titles = get_titles(f)
-    print(titles)
     rows = get_rows(f)
     sql = generate_sql(titles, rows)
 
