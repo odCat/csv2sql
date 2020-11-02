@@ -40,4 +40,11 @@ def generate_sql(titles, rows):
     return sql
 
 if __name__ == '__main__':
-    pass
+    f = open('input.csv', 'r')
+
+    titles = get_titles(f)
+    print(titles)
+    rows = get_rows(f)
+    sql = generate_sql(titles, rows)
+
+    print(sql)
