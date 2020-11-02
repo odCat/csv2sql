@@ -8,7 +8,7 @@ def parse_columns(columns):
 
 def get_titles(aFile):
     titles = aFile.readline().rstrip()
-    return titles.split(',')
+    return parse_columns(titles)
 
 def get_rows(aFile):
     lines = aFile.readlines()
