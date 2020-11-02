@@ -3,6 +3,9 @@
 def open_file(aFile):
     return open(aFile)
 
+def add_escape(value):
+    return value.replace("'", "\\'")
+
 def parse_columns(columns):
     return columns.split(',')
 
@@ -31,7 +34,7 @@ def generate_sql(titles, rows):
             if j == '':
                 sql += 'null,'
             else:
-                sql += "'" + j + "'," 
+                sql += "'" + add_escape(j) + "'," 
         sql = sql[:-1] + '),'
     sql = sql[:-1] + '\n;'
     return sql

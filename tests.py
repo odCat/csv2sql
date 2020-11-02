@@ -24,6 +24,11 @@ class Csv2sqlTests(unittest.TestCase):
         self.assertTrue(f)
         f.close()
 
+    def test_add_escape(self):
+        tested = "test'test'test"
+        expected = "test\\'test\\'test"
+        self.assertEqual(expected, csv2sql.add_escape(tested))
+
     def test_parse_columns(self):
         columns_line = ',COLUMN1,COLUMN2,,COLUMN3,'
         expected = ['','COLUMN1', 'COLUMN2', '', 'COLUMN3', '']
