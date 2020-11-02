@@ -26,7 +26,7 @@ class Csv2sqlTests(unittest.TestCase):
 
     def test_add_escape(self):
         tested = "test'test'test"
-        expected = "test\\'test\\'test"
+        expected = "test''test''test"
         self.assertEqual(expected, csv2sql.add_escape(tested))
 
     def test_parse_columns(self):

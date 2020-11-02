@@ -4,7 +4,7 @@ def open_file(aFile):
     return open(aFile)
 
 def add_escape(value):
-    return value.replace("'", "\\'")
+    return value.replace("'", "''")
 
 def parse_columns(columns):
     return columns.split(',')
