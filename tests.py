@@ -36,14 +36,14 @@ class Csv2sqlTests(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_get_titles(self):
-        f = open(self.test_file, 'r')
+        f = open(self.test_file, 'r', encoding="utf-8")
         titles = csv2sql.get_titles(f)
         expected_titles= ['column1','column2','column3','column4']
         self.assertEqual(expected_titles, titles)
         f.close()
 
     def test_get_rows(self):
-        f = open(self.test_file, 'r')
+        f = open(self.test_file, 'r', encoding="utf-8")
         f.readline()
         rows = csv2sql.get_rows(f)
         expected_rows = [['','value2','value3','value4'],
@@ -52,7 +52,7 @@ class Csv2sqlTests(unittest.TestCase):
         f.close()
 
     def test_generate_sql(self):
-        f = open(self.test_file, 'r')
+        f = open(self.test_file, 'r', encoding="utf-8")
         titles = csv2sql.get_titles(f)
         rows = csv2sql.get_rows(f)
         expected_sql = (

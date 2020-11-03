@@ -43,7 +43,7 @@ def generate_sql(titles, rows):
     return sql
 
 if __name__ == '__main__':
-    f = open('input.csv', 'r')
+    f = open('input.csv', 'r', encoding="utf-8")
 
     titles = get_titles(f)
     rows = get_rows(f)
