@@ -27,7 +27,7 @@ def generate_sql(titles, rows):
         sql += '\n\tcolumn' + str(count) + ' as ' + i + ','
         count += 1
     sql = sql[:-1] + '\n'
-    sql += 'from values'
+    sql += 'from\n\t(values'
     for i in rows:
         sql += '\n\t('
         for j in i:
@@ -43,7 +43,7 @@ def generate_sql(titles, rows):
     return sql
 
 if __name__ == '__main__':
-    f = open('input.csv', 'r', encoding="utf-8")
+    f = open('input3.csv', 'r', encoding="utf-8")
 
     titles = get_titles(f)
     rows = get_rows(f)

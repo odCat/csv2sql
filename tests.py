@@ -61,7 +61,8 @@ class Csv2sqlTests(unittest.TestCase):
                 '\tcolumn2 as column2,\n'
                 '\tcolumn3 as column3,\n'
                 '\tcolumn4 as column4\n'
-                'from values\n'
+                'from\n'
+                '\t(values\n'
                 "\t(null,'value2','value3','value4'),\n"
                 "\t(null,'value21','value3','value4')\n"
                 ';')
