@@ -1,7 +1,9 @@
-#!python3
+#!python
+
+from sys import argv
 
 def open_file(aFile):
-    return open(aFile)
+    return open(aFile, 'r', encoding="utf-8")
 
 def add_escape(value):
     return value.replace("'", "''")
@@ -43,10 +45,13 @@ def generate_sql(titles, rows):
     return sql
 
 if __name__ == '__main__':
-    f = open('input3.csv', 'r', encoding="utf-8")
+    if len(argv) == 2:
+        f = open_file(argv[1])
 
-    titles = get_titles(f)
-    rows = get_rows(f)
-    sql = generate_sql(titles, rows)
+        titles = get_titles(f)
+        rows = get_rows(f)
+        sql = generate_sql(titles, rows)
 
-    print(sql)
+        print(sql)
+    else:
+        print('Usage: csv2sql file')
