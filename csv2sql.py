@@ -34,7 +34,7 @@ def generate_sql(titles, rows):
         sql += '\n\tcolumn' + str(count) + ' as ' + i + ','
         count += 1
     sql = sql[:-1] + '\n'
-    sql += 'from\n\t(values'
+    sql += 'from\n\tvalues'
     for i in rows:
         sql += '\n\t('
         for j in i:
