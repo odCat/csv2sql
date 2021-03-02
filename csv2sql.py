@@ -1,9 +1,14 @@
 #!python
 
+from sys import exit as sysexit
 from sys import argv
 
 def open_file(aFile):
-    return open(aFile, 'r', encoding="utf-8")
+    try:
+        return open(aFile, 'r', encoding="utf-8")
+    except FileNotFoundError:
+        print('Wrong file or path: ' + aFile)
+        sysexit()
 
 def add_escape(value):
     return value.replace("'", "''")
